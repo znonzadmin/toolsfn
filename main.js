@@ -127,18 +127,18 @@ function getOS() {
 
 }
 
-
+/**name:getWithdrawConfirm()
+ * input：text:oninput事件输入监听货币函数
+ * o:this,
+ * i:隐藏域的值
+ * tips:错误提示
+ * type:哪种类型的最大限制
+ */
 {
     const WXWITHDWRAWALMAX = 20000.00; //微信允许最大值
     const BANKWITHDWRAWALMAX = 50000.00; //银行卡允许最大值
     const CASHADVANCEMAX = 8000.00 //信用卡支付额度最大值
-        /**name:getWithdrawConfirm()
-         * input：text:oninput事件输入监听货币函数
-         * o:this,
-         * i:隐藏域的值
-         * tips:错误提示
-         * type:哪种类型的最大限制
-         */
+
     function getWithdrawConfirm(o, i, tips, type) {
         var wx_withdraw_tips = $("." + tips);
         wx_withdraw_tips.hide();
@@ -185,4 +185,95 @@ function getOS() {
 
         }
     }
+}
+
+
+//
+/**
+ * js控制将字符串逗号分隔转化为数组
+ */
+function stringToArray(){//es5
+    return [].splice.call(arguments);
+}
+function stringToArray(){//es6
+    return [...arguments];
+}
+function stringToArray(arg){
+    return arg.split(',');
+    return arg.split('&');
+    return arg.split(';');
+}
+
+//将数组转成字符串
+function arrayToString(array){
+    return array.join(",");
+}
+
+//电话号码验证
+ function checkTel(id) {
+      var obj = document.getElementById(id);
+      var value = obj.value;
+      var regTel1 = /^(([0\+]\d{2,3}-)?(0\d{2,3})-)(\d{7,8})(-(\d{3,}))?$/.test(value);//带区号的固定电话
+      var regTel2 = /^(\d{7,8})(-(\d{3,}))?$/.test(value);//不带区号的固定电话
+      var regTel3 = /^(((13[0-9]{1})|(14[0-9]{1})|(15[0-9]{1})|}(17[0-9]{1})(18[0-9]{1}))+\d{8})$/.test(value);//手机电话
+      if(value != ""){
+        if (!regTel1 && !regTel2 && !regTel3) {
+          alert("电话号码输入有误！");
+          obj.focus();
+          return false;
+        }
+      }else {
+        alert("请输入电话号码！");
+        return false;
+      }
+      alert("电话号码输入正确！");
+      return true;
+    }
+//验证邮箱
+function isEmail(str){
+    var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+    return reg.test(str);
+}
+//验证身份证号码
+function isCP(str){
+    //身份证号（18位）正则
+    var cP = /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
+    return cP.test(str);
+}
+
+//验证中文
+function isZH(str){
+    var re1 = new RegExp("^([\u4E00-\uFA29]|[\uE7C7-\uE7F3]|[a-zA-Z0-9])*$");
+    return rel.test(str);
+}
+
+// 验证url
+function isURL(str){
+//URL正则
+var urlP= /^((https?|ftp|file):\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
+    return urlP.test(str)
+}
+
+//密码强度验证
+function isPassword(str){
+    //密码强度正则，最少6位，包括至少1个大写字母，1个小写字母，1个数字，1个特殊字符
+    if(str.lengt<6){
+        return '密码长度小于6位'
+    }
+    var pPattern = /^.*(?=.{6,})(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*? ]).*$/;
+    return pPattern.test(str);
+}
+//pv4验证
+function ipV4(str){
+    //ipv4地址正则
+var ipP = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+//输出 true
+   return  ip.test(str);
+}
+
+//16进制颜色
+function (str){
+    var cPattern = /^#?([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/;
+    //输出 true
+    return cPattern.test(str);
 }
