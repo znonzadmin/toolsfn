@@ -277,3 +277,60 @@ function (str){
     //输出 true
     return cPattern.test(str);
 }
+
+
+//小数点取出两位
+function numToFixedTwo(num){//toFixed();
+    if(isNaN(num)){
+        num = 0;
+    }
+    if(typeof(num) === "string"){
+        num = parseFloat(num);
+    }
+      let mg = num,
+          n = mg.toString();
+      if(n.indexOf(".") > 0){
+          g = n.split("."),
+          p = g[0],
+          k = g[1].substring(0,2),
+          val = p+"."+k;
+          n = parseFloat(val);
+      }else{
+        n = Number(n);
+      }
+      console.log(n);
+      return n;
+  }
+  numToFixedTwo("-10000.9a");
+
+
+//手机端返回=====================
+{
+    window.onload = function(){
+            pushHistory();
+            var bool=false;
+            setTimeout(function(){
+                bool=true;
+            },1500);
+            window.addEventListener("popstate", function(e) {
+              if(bool){
+                    //alert("我监听到了浏览器的返回按钮事件啦");//根据自己的需求实现自己的功能
+                    //window.history.go(-1);
+                    //window.history.back();
+                    window.history.go(-1);
+                }
+                pushHistory();
+
+        }, false);
+
+        function pushHistory() {
+               var state = {
+                   title: "title",
+                   url: window.location.href
+               };
+           window.history.pushState(state, "title", "#");
+       }
+    }
+
+}
+//手机端返回=====================
